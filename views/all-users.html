@@ -1,0 +1,83 @@
+{{template "partials/header" .}}
+{{template "partials/side-nav-header" .}}
+    
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">All Users</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">All Users</li>
+                        </ol>
+
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                            </div>
+                            <div class="card-body">
+                                <table id="datatablesSimple">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Active</th>
+                                            <th>Delete</th>
+                                            <th>Updated Date</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Active</th>
+                                            <th>Delete</th>
+                                            <th>Updated Date</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        {{ range .users }}
+                                            <tr>
+                                                <td>{{.Name}}</td>
+                                                <td>{{.Email}}</td>
+                                                <td>
+                                                    {{if .IsActive}}
+                                                        <span class="badge text-bg-success">Active</span>
+                                                    {{else}}
+                                                        <span class="badge text-bg-warning text-white">Inactive</span>
+                                                    {{end}}
+                                                </td>
+                                                <td>
+                                                    {{if .IsDelete}}
+                                                        <span class="badge text-bg-danger text-white">Deleted</span>
+                                                    {{else}}
+                                                        <span class="badge text-bg-success">Working</span>
+                                                    {{end}}
+                                                </td>
+                                                <td>{{.UpdatedAt}}</td>
+                                                <td>
+                                                    <a href="edit?id={{.ID}}">
+                                                        <span 
+                                                            class="badge rounded-pill text-bg-primary mx-1 my-1"
+                                                            data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Edit">
+                                                            <i class="fas fa-edit"></i>
+                                                        </span>
+                                                    </a>
+                                                    <a href="delete?id={{.ID}}">
+                                                        <span 
+                                                            class="badge rounded-pill text-bg-danger mx-1 my-1"
+                                                            data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Delete">
+                                                            <i class="fas fa-trash"></i>
+                                                        </span>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        {{ end }}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                
+                
+            
+{{template "partials/side-nav-footer" .}}
+{{template "partials/footer" .}}
